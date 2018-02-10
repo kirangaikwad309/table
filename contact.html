@@ -1,0 +1,113 @@
+<html>
+        <title>dcc</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+        body {
+            font-family: "Times New Roman;"
+            }
+        .mySlides {display: none}
+        </style>
+<body>
+    <!-- validation -->
+    
+<?php
+$name = $message = $email = $con ="";
+$nameErr =$emailErr =$messageErr ="";
+if(isset($_POST['submit']))
+{
+     $con = mysqli_connect("localhost","root","","kiran");
+        $name = $_POST['Name'];
+        $message = $_POST['Message'];
+      $email = $_POST['Email'];
+       $error_status = false;
+//name validation
+    if (empty($_POST['Name']))
+   {
+           $nameErr = "Please fill out your name.";
+          $error_status = true;
+   } 
+
+//message validation
+    if (empty($_POST['Message']))
+     {
+         $messageErr = "Please fill out your message";
+         $error_status = true;
+       } 
+//email validation
+     if (empty($_POST['Email']))
+         {
+            $emailErr = " Please fill out your email address.";
+             $error_status = true;
+          } 
+     else
+        {
+               $email = $_POST['Email'];
+                if(!filter_var($email,FILTER_VALIDATE_EMAIL))
+                {
+                         $emailErr = " INVALID email address.";
+                         $error_status = true;
+                   }
+        }
+if(!$error_status) {
+
+$query = "INSERT INTO info (Name, Message, Email )
+VALUES ('$name', '$message', '$email')";
+echo $query;
+if(mysqli_query($con,$query))
+{
+echo "ok";
+}
+else
+{
+echo "no";
+}
+}
+}
+mysqli_close($con);
+?>
+<!-- /validation -->
+<!-- The Contact Section -->
+  <div class="w3-container w3-content w3-padding-64" style="max-width:800px;" id="contact">
+    <h1 class="w3-wide w3-center"style="font-size:30px;text-align:center;">CONTACT</h1>
+    <p class="w3-opacity w3-center"style="font-size:20px;"><i>Suggestions? Drop a note!</i></p>
+    <div class="w3-row w3-padding-32">
+      <div class="w3-col lg-12 w3-large w3-margin-bottom">
+            <div class="row">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12 revaleContact">
+                        <p id="contactUsName" style="font-size:15px;"><strong>Dr. Jaydip Revale</strong> <br> <span style="font-size:1em;">Dr. Revale's Diabetes, Nutrition Care &amp; Research Centre</span></p>
+                        <p id=" contactUsDesignation " style="font-size:15px;"><b>Conference Secretary</b></p>
+                        <p style="font-size:15px;"><i>dccconference@gmail.com</i></p>
+                <p id="contactUsPhone " style="font-size:15px;">02162-229052/229770</p>
+                        <p id="contactUsAddress " style="font-size:15px;">505/A/24, Plot No. 4, LIC Colony,<br> Sadar Bazar, Satara, 415001, Maharashtra</p>
+
+                    </div>
+    
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12 avContact" >
+                        <strong style="font-size:15px;"><b>AV Concept</b></strong>, <br><p style="font-size:15px;">D-3/503 Shivsagar Phase 2, Manik Bagh, <br>Sinhgad Road, Pune - 51 <br>Mob: 8380009007, 8087346712 <br>Email: <i>avconcepts11@gmail.com</i>, <i>avconceptspune@gmail.com</i></p>
+                    </div>
+                </div><br><br>
+      <div class="w3-col md6">
+ <form action="contact.php" method="post">
+ <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+ <div class="w3-half">
+ <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"style="font-size:20px;"><?php echo $nameErr;?>
+  </div>
+  <div class="w3-half">
+   <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"style="font-size:20px;"><?php echo $emailErr;?>
+   </div>
+   </div>
+   <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"style="font-size:20px;"><?php echo $messageErr;?>
+   <input type ="submit" class="w3-button w3-black w3-section w3-right" name="submit"style="font-size:20px;">
+   </form>
+ </div>
+ </div>
+ </div>
+</body>
+ </html>
