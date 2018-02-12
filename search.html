@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px sotdd #ddd;
+  margin-bottom: 12px;
+}
+
+#mytable {
+  tdst-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#mytable td a {
+  border: 1px sotdd #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#mytable td a:hover:not(.header) {
+  background-color: #eee;
+}
+</style>
+</head>
+<body>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
+<table id="myTable">
+        <thead>
+                <tr>
+                    <th rowspan="2" class="text-center">Patrons</th>
+                    <th rowspan="2" class="text-center">Scientific Committee</th>
+                    <th rowspan="2" class="text-center">DCC Managing Committee</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dr.Unnikrishnan A.G., Pune</td>
+                    <td>Dr. Jaydip Revale, Satara</td>
+                    <td rowspan="2">Dr. Jaydip Revale, Satara <br>(Secretary)</td>
+                </tr>
+                <tr>
+                    <td>Dr. Shrirang Godbole, Pune</td>
+                    <td>Dr. Somanath Sabale, Satara</td>
+                    <!-- <td>Dr. Somanath Sabale (Scientific Co-Chairman)</td> -->
+                </tr>
+                <tr>
+                    <td>Dr. Milind Patwardhan, Miraj</td>
+                    <td>Dr. Prataprao Gole, Satara</td>
+                    <td rowspan="2">Dr. Somanath Sabale, Satara <br> (Scientific Co-Chairman)</td>
+                </tr>
+                <tr>
+                    <td>Dr. Uday Phadke, Pune</td>
+                    <td>Dr. Rajiv Kovil, Mumbai</td>
+                    <!-- <td></td> -->
+                </tr>
+                <tr>
+                    <td>Dr. Shailaja Kale, Pune</td>
+                    <td>Dr. Manoj Chawla, Mumbai</td>
+                    <td rowspan="2">Dr. Prataprao Gole, Satara <br> (Scientific Chairman)</td>
+                </tr>
+                <tr>
+                    <!-- <td>Dr. Ranjit Jagatap</td> -->
+                    <td>Dr. Rajesh Dharamsi, Sangli</td>
+                    <td>Dr. Tejas Shah, Mumbai</td>
+                    <!-- <td></td> -->
+                </tr>
+                <tr>
+                    <td>Dr. Anil Katdare, Pune</td>
+                    <td>Dr. Rahul Dhope, Pune</td>
+                    <!-- <td></td> -->
+                </tr>
+                <tr>
+                    <td>Dr. Sunil Sathe, Pune</td>
+                    <td>Dr. Rajesh Deshmane, Kolhapur</td>
+                    <!-- <td></td> -->
+                </tr>
+                <tr>
+                    <td>Dr. Shashank Shah, Pune</td>
+                    <td>Dr. Sanjay Agarwal, Pune</td>
+                    <!-- <td></td> -->
+                </tr>
+                <tr class="lastRow">
+                    <td></td>
+                    <td>Dr. Suhas Erande, Pune</td>
+                    <!-- <td></td> -->
+                </tr>
+            </tbody>
+</table>
+
+<script>
+   function myFunction() {
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+  
+</script>
+
+</body>
+</html>
+
